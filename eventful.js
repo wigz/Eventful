@@ -111,7 +111,7 @@ class Eventful {
       this._events[type].splice(index, 1);
     }
 
-    // return this for chainging
+    // return this for chaining
     return this;
   }
 
@@ -142,11 +142,11 @@ class Eventful {
     data.ev_type = type;
 
     // execute callbacks
-    this._events[type].map((cb, i) => {
+    this._events[type].forEach((cb, i) => {
       cb.call(this, data);
     });
 
-    // return this for chainging
+    // return this for chaining
     return this;
   }
 }
