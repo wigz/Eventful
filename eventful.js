@@ -1,3 +1,9 @@
+/*
+
+Copyright (c) YEAR Name. All Rights Reserved.
+
+*/
+
 class Eventful {
 
   /*
@@ -83,7 +89,7 @@ class Eventful {
   | type:string - event name
   | ...args[0]:function - callback
   |
-  | Register an event that fires once.
+  | Remove an event.
   ------------------------------------------ */
   off(type, ...args) {
     let index;
@@ -108,10 +114,12 @@ class Eventful {
     // are there any listeners?
     index = this._events[type].indexOf(args[0]);
     if(index !== -1) {
-      this._events[type].splice(index, 1);
+      setTimeout(() => {
+        this._events[type].splice(index, 1);
+      }, 0);
     }
 
-    // return this for chaining
+    // return this for chainging
     return this;
   }
 
@@ -125,7 +133,6 @@ class Eventful {
   | Trigger an event.
   ------------------------------------------ */
   trigger(type, data = {}) {
-
     // check type / data
     this.validateEventType(type);
 
@@ -146,7 +153,9 @@ class Eventful {
       cb.call(this, data);
     });
 
-    // return this for chaining
+    // return this for chainging
     return this;
   }
 }
+
+module.exports = Eventful;
